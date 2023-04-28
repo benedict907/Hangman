@@ -12,7 +12,7 @@ public class CheckGuess {
             revealedLetters = temp;
             revealedLetters[revealedLetters.length - 1] = guess;
         }
-        
+        ///changinfisndsndflsdn fsjd
         return revealedLetters;
     }
     public int checkLetter(int lifes, String guess, String word) {
