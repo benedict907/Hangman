@@ -1,12 +1,16 @@
+import java.util.HashSet;
+import java.util.Iterator;
+
 public class Display {
-    public String hideUnrevealedlLetters(String word, String[] revealedLetters) {
+    public String hideUnrevealedlLetters(String word, HashSet<String> guessedLetters) {
         // Replaces each letter with an underscore if not revealed and then returns the string
+        Iterator<String> iterator = guessedLetters.iterator();
         String hiddenWord = "";
         for (int i = 0; i < word.length(); i++) {
             String temp = "_ ";
-            for (String n : revealedLetters) {
-                if (String.valueOf(word.charAt(i)).equals(n)) {
-                    temp = n + " ";
+            while (iterator.hasNext()) {
+                if (String.valueOf(word.charAt(i)).equals(iterator.next())) {
+                    temp = iterator.next() + " ";
                 }
             }
             hiddenWord += temp;
@@ -92,13 +96,18 @@ public class Display {
 
         return lifeDisplayString;
     }
-    public String revealedLetters(String[] revealedLettersArray) {
+    public String guessedLetters(HashSet<String> guessedLettersArray) {
         // Returns revealed letters
-        String revealedLettersString = "Revealed Letters: ";
-        for (String i : revealedLettersArray) {
-            revealedLettersString += i + " ";
+        Iterator<String> iterator = guessedLettersArray.iterator();
+        String guessedLettersString = "Guessed Letters: ";
+        // for (String i : guessedLettersArray) {
+        //     guessedLettersString += i + " ";
+        // }
+
+        while (iterator.hasNext()) {
+            guessedLettersString += iterator.next() + " ";
         }
 
-        return revealedLettersString;
+        return guessedLettersString;
     }
 }

@@ -1,19 +1,14 @@
-import java.util.Arrays;
+import java.util.HashSet;
 
 public class CheckGuess {
-    public String[] returnRevealedLetters(String guess, String word, String[] revealedLetters) {
+    public HashSet<String> returnGuessedLetters(String guess, String word, HashSet<String> guessedLetters) {
         // Checks whether guess is correct and then returns revealed letters
         if (word.contains(guess)) {
-            String[] temp = Arrays.copyOf(revealedLetters, revealedLetters.length + 1);
-            revealedLetters = temp;
-            revealedLetters[revealedLetters.length - 1] = guess;
+            guessedLetters.add(guess);
         } else {
-            String[] temp = Arrays.copyOf(revealedLetters, revealedLetters.length + 1);
-            revealedLetters = temp;
-            revealedLetters[revealedLetters.length - 1] = guess;
+            guessedLetters.add(guess);
         }
-        ///changinfisndsndflsdn fsjd
-        return revealedLetters;
+        return guessedLetters;
     }
     public int checkLetter(int lifes, String guess, String word) {
         // Checks whether guess is correct and if it is not then it reduces user's life

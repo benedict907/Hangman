@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.HashSet;
 
 public class Main {
     public static void main(String[] args) {        
@@ -27,25 +28,28 @@ public class Main {
         String[] revealedLetters = {};
         int lifes = 6;
 
+        // HashSet object
+        HashSet<String> guessedLetters = new HashSet<String>();
+
         // Generates random word
         String word = chooseWord.generateWord();
 
         boolean gameActive = true;
         while (gameActive) {
             // Hides word and then displays hidden word
-            System.out.println(display.hideUnrevealedlLetters(word, revealedLetters));
+            System.out.println(display.hideUnrevealedlLetters(word, guessedLetters));
 
             // Displays hangman life
             System.out.println(display.lifeDisplay(lifes));
 
             // Displays revealed letters
-            System.out.println(display.revealedLetters(revealedLetters));
+            System.out.println(display.guessedLetters(guessedLetters));
 
             // Takes user guess
             String userGuess = userInput.guess(scanner);
 
             // Check whether guess is correct and if it is then add revealed letters to blank
-            revealedLetters = CheckGuess.returnRevealedLetters(userGuess, word, revealedLetters);
+            guessedLetters = CheckGuess.returnGuessedLetters(userGuess, word, guessedLetters);
 
             // Check whether guess is correct and if it is not then reduce life
             lifes = CheckGuess.checkLetter(lifes, userGuess, word);
@@ -53,18 +57,18 @@ public class Main {
             // Check whether user won the game
             if (lifes > 0) {
                 if (CheckGuess.checkWinnner(lifes, word, revealedLetters)) {
-                    System.out.println(display.hideUnrevealedlLetters(word, revealedLetters));
+                    System.out.println(display.hideUnrevealedlLetters(word, guessedLetters));
                     System.out.println(display.lifeDisplay(lifes));
-                    System.out.println(display.revealedLetters(revealedLetters));
+                    System.out.println(display.guessedLetters(guessedLetters));
 
                     System.out.println("You won! The word was " + word + ".");
                     System.out.println("");
                     gameActive = false;
                 }
             } else if (lifes == 0) {
-                System.out.println(display.hideUnrevealedlLetters(word, revealedLetters));
+                System.out.println(display.hideUnrevealedlLetters(word, guessedLetters));
                 System.out.println(display.lifeDisplay(lifes));
-                System.out.println(display.revealedLetters(revealedLetters));
+                System.out.println(display.guessedLetters(guessedLetters));
                 
                 System.out.println("You lost! The word was " + word + ".");
                 System.out.println("");

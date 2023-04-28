@@ -1,2 +1,3 @@
+- fix Display.hideUnrevealedlLetters()
+- continue reworking HashSet code on CheckGuess.checkWinnner()
 - polish game
-- make it so that revealedLetters has completely unique objects in array (hint: HashSet)
